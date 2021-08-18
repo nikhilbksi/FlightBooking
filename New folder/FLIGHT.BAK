@@ -1,0 +1,289 @@
+#include<fstream.h>
+#include<conio.h>
+#include<string.h>
+#include<stdio.h>
+#include<process.h>
+//--------------------------------------------------     harsh pc-. disp_flit
+struct date
+{
+	int date,month,year;
+};
+struct time
+{
+	int hours;
+	int minutes;
+};
+class flight
+{
+	protected:
+	char airline[30];
+	char source[30];
+	char destination[30];
+	char type[15];            // international and domestic
+	time t;
+	time du;
+	date dod;
+	int eco,business,first; 	// no. of each seats
+	char mealv[20],mealn[20];	 //veg, non-veg
+	//cost:-
+	long int cost_flight; 	// desti+nation and airline dependent
+	long int cost_eco,cost_bus,cost_fir;	// for eco,business,first
+	long int cost_v,cost_n;	// for veg and non-veg
+
+	public:
+	flight()
+	{
+		strcpy(mealv,"VEGETARIAN");
+		strcpy(mealn,"NON-VEGETARIAN");
+	}
+	//admin:-
+	void in();
+	void modify();
+	void out();
+	//customer-reserve :-
+	void display();
+	char gettype()
+	{
+		return type;
+	}
+};
+//-----admin----------------------------------------
+void flight::in()
+{
+	cout<<"Enter airline: ";   	gets(airline);
+	cout<<"Enter source: ";		gets(source);
+	cout<<"Enter destination: ";	gets(destination);
+	cout<<"Enter flight type(international/domestic): ";	gets(type);
+	cout<<"Enter time of departure:\n";
+	cout<<"Hour of day: ";		cin>>t.hours;
+	cout<<"Minutes: ";		cin>>t.minutes;
+	cout<<"Enter date of departure: \n";
+	cout<<"Date: ";			cin>>dod.date;
+	cout<<"Month: ";		cin>>dod.month;
+	cout<<"Year: ";			cin>>dod.year;
+	cout<<"Duration:\n";
+	cout<<"Hours: ";		cin>>du.hours;
+	cout<<"Enter no. of seats:\n";
+	cout<<"Economy: ";		cin>>eco;
+	cout<<"Business: ";		cin>>business;
+	cout<<"First class: ";		cin>>first;
+	cout<<"Enter cost:\n";
+	cout<<"Flight: ";		cin>>cost_flight;
+	cout<<"Seat:- ";
+	cout<<"Economy:";		cin>>cost_eco;
+	cout<<"Business: ";		cin>>cost_bus;
+	cout<<"First: ";		cin>>cost_fir;
+	cout<<"Meal:\n";
+	cout<<"Veg: ";			cin>>cost_v;
+	cout<<"Non-veg: ";		cin>>cost_n;
+}
+void flight::out()
+{
+	cout<<"Airline: "<<airline<<endl;
+	cout<<"Source: "<<source<<"\tDestination: "<<destination<<endl;
+	cout<<"Flight Type: "<<type<<endl;
+	cout<<"Date of departure:\n";
+	cout<<"Date: "<<dod.date<<"\tMonth: "<<dod.month<<"\tYear: "<<dod.year<<endl;
+	cout<<"Time of departure: "<<t.hours<<":"<<t.minutes<<endl;
+	cout<<"Duration: "<<du.hours<<endl;
+	cout<<"No. of seats: \n";
+	cout<<"Economy: "<<eco<<"\tBusiness: "<<business<<"\tFirst: "<<first<<endl;
+	cout<<"Cost of seats:\n";
+	cout<<"Economy: "<<cost_eco<<"\tBusiness: "<<cost_bus<<"\tFirst: "<<cost_fir<<endl;
+	cout<<"Meal cost:\n";
+	cout<<"Vegetarian: "<<cost_v<<"\tNon-Vegetarian: "<<cost_n<<endl;
+}
+void flight::modify()
+{
+	char ch;
+	cout<<"Choose a feild to be Modified:\n";
+	cout<<"1. Airline name\n 2. Source\n 3. Destination\n";
+	cout<<"4. Date of Departure\n 5. Time of Departure\n";
+	cout<<"6. Duration\n 7. No. of seats\n 8.Cost of seats\n";
+	cout<<"9. Cost of meals\n";
+	cout<<"Enter choice: ";
+	cin>>ch;
+	switch(ch)
+	{
+		case 1: cout<<"Enter airline: ";	gets(airline);
+			break;
+		case 2: cout<<"Enter source: ";		gets(source);
+			break;
+		case 3: cout<<"Enter destination: ";	gets(destination);
+			break;
+		case 4: cout<<"Enter Date:\n ";
+			cout<<"Date: ";		cin>>dod.date;
+			cout<<"Month: ";	cin>>dod.month;
+			cout<<"Year: ";		cin>>dod>year;
+			break;
+		case 5: cout<<"Enter time of departure:\n";
+			cout<<"Hour: ";		cin>>t.hours;
+			cout<<"Minutes; ";	cin>>t.minutes;
+			break;
+		case 6: cout<<"Enter duration; ";	cin>>du.hours;
+			break;
+		case 7: cout<<"Enter no. of seats:\n ";
+			cout<<"Economy: ";	cin>>eco;
+			cout<<"Business: ";	cin>>business;
+			cout<<"First: ";	cin>>first;
+			break;
+		case 8: cout<<"Enter cost of seats:\n";
+			cout<<"Economy: ";	cin>>cost_eco;
+			cout<<"Business: ";	cin>>cost_bus;
+			cout<<"First: ";	cin>>cost_fir;
+			break;
+		case 9: cout<<"Enter cost of meals:\n";
+			cout<<"Vegetarian: ";		cin>>cost_v;
+			cout<<"Non-Vegetarian: ";	cin>>cost_n;
+			break;
+		default: cout<<"Wrong choice!!!!";
+	}
+}
+//------passenger------------------------------------
+void flight::display()
+{
+	cout<<source<<" --> "<<destination<<"\t\t\t\t\t"<<"Cost economy: "<<cost_eco<<endl;
+	cout<<airline<<"\t\t\t"<<"Duration: "<<du.hours<<"\t\t"<<"Cost Business: "<<cost_bus<<endl;
+	cout<<"DOD: "<<dod.day<<"-"<<dod.month<<"-"<<dod.year<<"\t\t"<<"Time of departure: "<<t.hours<<":"<<t.minutes<<"\t"<<"Cost First: "<<cost_fir<<endl;
+}
+
+
+//------------------------------------------------------------
+class passenger
+{
+	protected:
+	int a;
+	char fname[20],lname[20];
+	int age;
+	char gender;	//m or f
+	char passport[20];
+	public:
+	void input();
+	void in_pass()	  //passport details if flight is international
+	{
+		cout<<"ENTER PASSPORT NO.: ";
+		gets(passport);
+		a=0;
+	}
+	void output();
+};
+void passenger::input()
+{
+	cout<<"ENTER NAME:\n ";
+	cout<<"FIRST NAME: ";		gets(fname);
+	cout<<"LAST NAME: ";		gets(lname);
+	cout<<"ENTER AGE: ";		cin>>age;
+	cout<<"ENTER GENDER(M/F): ";	cin>>gender;
+}
+void passenger::output()
+{
+	cout<<"ENTERED DETAILS:\n";
+	cout<<"NAME: "<<fname<<" "<<lname<<endl;
+	cout<<"AGE: "<<age<<endl;
+	cout<<"GENDER: "<<gender<<endl;
+	if(a==0)
+		cout<<"PASSPORT NO.: "<<passport<<endl;
+}
+//------------------------------------------------------------
+class user
+{
+	protected:
+
+	char userid[40],adminid[40]; //email for customers
+	char passwords[25],ad_pass[40];
+	public:
+	user()
+	{
+		strcpy(adminid,"Admin");
+		strcpy(ad_pass,"Gangadharshaktimaanhai");
+	}
+	void admin_pass();
+	void passenger_enter();
+	void passenger_pass();
+};
+void admin_pass()
+{
+	int x=0;
+	char p,user[30],pass[30];
+	do
+	{
+		cout<<"ENTER ADMIN ID:-\t";
+		gets(user);
+		cout<<"\n\n";
+		cout<<"ENTER PASSWORD:-\t";
+		getch(pass);
+		cout<<"*";
+
+		if ((strcmp(adminid,user)==1)&&(strcmp(pass,ad_pass)==1))
+			     x++;
+
+		else
+		{
+			cout<<"ERROR !!! EITHER THE PASSWORD OR USERNAME IS WRONG\n";
+			cout<<"TO ENTER AGAIN PRESS ANY KEY OR ENTER Z TO EXIT	\n";
+			getch(p);
+			if(p=='Z')
+				exit(0);
+
+		}
+	}while(x==0);
+	in();
+}
+
+void user::passenger_enter()
+{
+	char f[25];
+	int x=0,i,j;
+	cout<<"ENTER USERNAME:\t";
+	gets(userid);
+	cout<<"\n\n";
+	cout<<"ENTER PASSWORD:\t";
+	gets(passengers);
+	do
+	{
+		cout<<"RE-ENTER PASSWORD:\t";
+		gets(f);
+		if(strcmp(f,pass)==1)
+			x++;
+		else
+
+		{
+			cout<<"INCORRECT!!! PLEASE ENTER AGAIN\n";
+			getch();
+		}
+	}while(x==0);
+
+}
+void user::passenger_pass()
+{
+	int x=0;
+	char p,user[30],pass[30];
+	do
+	{
+		cout<<"ENTER USER ID:-\t";
+		gets(user);
+		cout<<"\n\n";
+		cout<<"ENTER PASSWORD:-\t";
+		getch(pass);
+		cout<<"*";
+
+		if ((strcmp(user,userid)==1)&&(strcmp(passwords,pass)==1))
+			     x++;
+
+		else
+		{
+			cout<<"ERROR !!! EITHER THE PASSWORD OR USERNAME IS WRONG\n";
+			cout<<"TO ENTER AGAIN PRESS ANY KEY OR ENTER Z TO EXIT	\n";
+			getch(p);
+			if(p=='Z')
+				exit(0);
+
+		}
+	}while(x==0);
+}
+//------------------------------------------------------
+
+class ticket: public flight,public passenger, public user
+{
+	unsigned long pnr; //ticket no.
+}b;

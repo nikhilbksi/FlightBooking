@@ -1,0 +1,88 @@
+void menu()
+{
+	clrscr();
+	char a,n;
+	do
+	{
+		gotoxy(20,5);
+		cout<<"WELCOME TO THE MASHHOOR TICKETING PROGRAM !!!\n";
+		gotoxy(30,6);
+		cout<<"(WE OFFER BEST DISCOUNTS)\n";
+		gotoxy(22,8);
+		cout<<"1. ADMINISTRATOR LOGIN\n";
+		gotoxy(22,10);
+		cout<<"2. PASSENGER LOGIN\n";
+		gotoxy(22,12);
+		cout<<"3. EXIT\n";
+		gotoxy(22,15);
+		cout<<"ENTER YOUR CHOICE:\t";
+		getch(a);
+		switch(a)
+		{
+			case 1 : a.admin_pass();
+				char k;
+				do
+				{
+					clrscr();
+					char f;
+					gotoxy(22,7);
+					cout<<"1. INPUT DETAILS\n";
+					gotoxy(22,9);
+					cout<<"2. MODIFY DETAILS\n";
+					gotoxy(22,11);
+					cout<<"3. DELETE\n";
+					gotoxy(22,13);
+					cout<<"4. DISPLAY FLIGHTS\n";
+					gotoxy(22,15);
+					cout<<"ENTER YOUR CHOICE\n";
+					getch(f);
+					switch(f)
+					{
+						case 1:	admin_in();                  // in flight
+							break;
+						case 2:	admin_modify();             // in flight
+							break;
+						case 3:	admin_delete();
+							break;
+						case 4:	admin_display();
+							break;
+						default: 	cout<<"WRONG CHOICE\n";
+					}
+					cout<<"TO OPEN ADMINISTRATOR'S MENU AGAIN PRESS L OR PRESS ANY KEY TO RETURN TO MAIN MENU\n";
+				}while(k=='l'||k=='L');
+				break;
+
+			case 2:	clrscr();
+				char k,f;
+				do
+				{
+					gotoxy(22,14);
+					cout<<"1.REGISTER \t";
+					gotoxy(40,14);
+					cout<<"2.LOGIN \n";
+					getch(f);
+					switch(f)
+					{
+						case 1 :	passenger_display(); 	 // flight details and passenger input
+							break;
+
+						case 2: 	ticket_out();
+							//user_mod();           //cancellation
+							break;
+						default : cout<<"WRONG CHOICE\n";
+					}
+					cout<<"PRESS L TO RETURN TO THE PASSENGER MENU OR PRESS ANY OTHER KEY TO RETURN TO MAIN MENU\n";
+					getch(k);
+					if(k!='l'||k!='L')
+						continue;
+				}while(k=='l'||k=='L');
+				break;
+			case 3: exit(0);
+			default: cout<<"WRONG CHOICE\n";
+		}
+
+	}while((a==1)||(a==2));
+}
+
+
+
